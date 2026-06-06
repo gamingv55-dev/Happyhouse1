@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="bg">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/leaf.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#284736" />
+
+    <title>Happy House — градина-бистро и ферма Happy Farm</title>
+    <meta
+      name="description"
+      content="Happy House е градина-бистро сред дървени беседки, цветя и фонтани — домашна кухня от 2014 г. и фермата Happy Farm с ламата Роско. Резервирайте маса или планирайте събитие."
+    />
+    <link rel="canonical" href="https://happyhouse.bg/" />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="restaurant" />
+    <meta property="og:locale" content="bg_BG" />
+    <meta property="og:site_name" content="Happy House" />
+    <meta property="og:title" content="Happy House — градина-бистро и ферма Happy Farm" />
+    <meta
+      property="og:description"
+      content="Зелена градина, домашна кухня и фермата с ламата Роско. Място за хубави моменти от 2014 г."
+    />
+    <meta property="og:image" content="https://happyhouse.bg/og-image.jpg" />
+    <meta property="og:url" content="https://happyhouse.bg/" />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Happy House — градина-бистро и ферма Happy Farm" />
+    <meta
+      name="twitter:description"
+      content="Зелена градина, домашна кухня и фермата с ламата Роско."
+    />
+
+    <!-- Шрифтове (Cyrillic) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500;1,600&family=Manrope:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Schema.org · Restaurant -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Restaurant",
+        "name": "Happy House",
+        "description": "Градина-бистро с домашна кухня сред дървени беседки, цветя и фонтани, и ферма Happy Farm с ламата Роско.",
+        "servesCuisine": "Българска",
+        "priceRange": "$$",
+        "image": "https://happyhouse.bg/og-image.jpg",
+        "url": "https://happyhouse.bg/",
+        "telephone": "+359880000000",
+        "foundingDate": "2014",
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "ул. Градинска 1",
+          "addressLocality": "Варна",
+          "addressCountry": "BG"
+        },
+        "openingHoursSpecification": [
+          {
+            "@type": "OpeningHoursSpecification",
+            "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+            "opens": "11:00",
+            "closes": "23:00"
+          },
+          {
+            "@type": "OpeningHoursSpecification",
+            "dayOfWeek": ["Saturday", "Sunday"],
+            "opens": "10:00",
+            "closes": "23:00"
+          }
+        ],
+        "acceptsReservations": "True"
+      }
+    </script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
+</html>
