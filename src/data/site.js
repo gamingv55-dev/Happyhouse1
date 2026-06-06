@@ -12,9 +12,11 @@ export const site = {
   address: {
     street: 'ул. Градинска 1',
     city: 'Варна',
-    full: 'ул. Градинска 1, гр. Варна',
+    full: 'Bistro Happy House, гр. Варна',
   },
-  mapQuery: 'Варна България',
+  // Точна локация на заведението (от Google Maps)
+  mapQuery: '43.2246488,27.9189883',
+  mapsLink: 'https://maps.app.goo.gl/uhttFuQW1kgKKBDm9',
 
   hours: [
     { day: 'Понеделник – Петък', time: '11:00 – 23:00' },

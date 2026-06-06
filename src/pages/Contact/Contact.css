@@ -88,11 +88,32 @@ a.contact-card__value:hover {
 }
 
 .contact__map {
+  position: relative;
   border-radius: var(--r-lg);
   overflow: hidden;
   border: 1px solid var(--line);
   box-shadow: var(--shadow-sm);
   min-height: 460px;
+}
+.contact__map-link {
+  position: absolute;
+  right: 14px;
+  bottom: 14px;
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 10px 16px;
+  border-radius: var(--r-pill);
+  background: var(--green-800);
+  color: var(--on-dark);
+  font-size: 0.85rem;
+  font-weight: 700;
+  box-shadow: var(--shadow-md);
+  transition: background 0.3s var(--ease), transform 0.3s var(--ease);
+}
+.contact__map-link:hover {
+  background: var(--clay);
+  transform: translateY(-2px);
 }
 .contact__map iframe {
   width: 100%;

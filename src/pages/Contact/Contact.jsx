@@ -69,8 +69,11 @@ export default function Contact() {
               title="Местоположение на Happy House"
               loading="lazy"
               referrerPolicy="no-referrer-when-downgrade"
-              src={`https://maps.google.com/maps?q=${encodeURIComponent(site.mapQuery)}&output=embed`}
+              src={`https://maps.google.com/maps?q=${encodeURIComponent(site.mapQuery)}&z=17&output=embed`}
             />
+            <a className="contact__map-link" href={site.mapsLink} target="_blank" rel="noreferrer">
+              <FiMapPin aria-hidden="true" /> Отвори в Google Maps
+            </a>
           </Reveal>
         </div>
       </section>
