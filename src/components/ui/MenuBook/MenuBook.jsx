@@ -1,4 +1,4 @@
-import { forwardRef, useRef, useState } from 'react'
+import { forwardRef, useRef, useState, useEffect } from 'react'
 import HTMLFlipBook from 'react-pageflip'
 import { FiChevronLeft, FiChevronRight } from 'react-icons/fi'
 import { menuCategories } from '../../../data/menu'
@@ -26,7 +26,28 @@ const ImagePage = forwardRef(function ImagePage({ src, n }, ref) {
 export default function MenuBook() {
   const bookRef = useRef(null)
   const [page, setPage] = useState(0)
+  const [isMobile, setIsMobile] = useState(false)
   const usePhotos = menuPages.length > 0
+
+  // На телефон показваме една страница, на компютър — разтворена книга
+  useEffect(() => {
+    const mq = window.matchMedia('(max-width: 700px)')
+    const update = () => setIsMobile(mq.matches)
+    update()
+    mq.addEventListener('change', update)
+    return () => mq.removeEventListener('change', update)
+  }, [])
+
+  // Размерите се събират в екрана; на телефон minWidth е малък, за да не прелива
+  const dims = isMobile
+    ? { width: 300, height: 430, minWidth: 220, maxWidth: 380, minHeight: 320, maxHeight: 600 }
+    : { width: 400, height: 560, minWidth: 380, maxWidth: 520, minHeight: 400, maxHeight: 720 }
+
+  // „Побутваме" флипбука да се преизчисли спрямо контейнера след монтиране/смяна
+  useEffect(() => {
+    const t = setTimeout(() => window.dispatchEvent(new Event('resize')), 60)
+    return () => clearTimeout(t)
+  }, [isMobile])
 
   const flip = (dir) => {
     const pf = bookRef.current?.pageFlip?.()
@@ -74,14 +95,16 @@ export default function MenuBook() {
     <div className="menu-book">
       <div className="menu-book__stage">
         <HTMLFlipBook
+          key={isMobile ? 'mobile' : 'desktop'}
           ref={bookRef}
-          width={400}
-          height={560}
-          minWidth={260}
-          maxWidth={560}
-          minHeight={380}
-          maxHeight={760}
+          width={dims.width}
+          height={dims.height}
+          minWidth={dims.minWidth}
+          maxWidth={dims.maxWidth}
+          minHeight={dims.minHeight}
+          maxHeight={dims.maxHeight}
           size="stretch"
+          usePortrait={true}
           showCover={true}
           maxShadowOpacity={0.35}
           mobileScrollSupport={true}
