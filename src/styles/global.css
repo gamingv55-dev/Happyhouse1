@@ -230,17 +230,15 @@ h4 {
   color: var(--on-dark);
 }
 
-/* Скролбар */
+/* Скрит скролбар (страницата си скролва нормално) */
+html {
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* старите Edge/IE */
+}
 ::-webkit-scrollbar {
-  width: 11px;
-}
-::-webkit-scrollbar-track {
-  background: var(--bg-2);
-}
-::-webkit-scrollbar-thumb {
-  background: var(--sage);
-  border-radius: var(--r-pill);
-  border: 3px solid var(--bg-2);
+  width: 0;
+  height: 0;
+  display: none; /* Chrome, Edge, Safari */
 }
 
 /* --- Намалено движение --- */
