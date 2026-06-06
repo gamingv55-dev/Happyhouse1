@@ -3,7 +3,6 @@ import ScrollToTop from './components/layout/ScrollToTop/ScrollToTop'
 import Header from './components/layout/Header/Header'
 import Footer from './components/layout/Footer/Footer'
 import ScrollProgress from './components/ui/ScrollProgress/ScrollProgress'
-import CustomCursor from './components/ui/CustomCursor/CustomCursor'
 
 import Home from './pages/Home/Home'
 import About from './pages/About/About'
@@ -19,7 +18,6 @@ export default function App() {
   return (
     <>
       <ScrollProgress />
-      <CustomCursor />
       <ScrollToTop />
       <Header />
       <main>
