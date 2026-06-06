@@ -98,8 +98,10 @@ export default function MenuBook() {
       <span className="book-cover__since">градина-бистро · от 2014</span>
       <span className="book-cover__hint">прелисти →</span>
     </Page>,
-    ...menuCategories.map((cat) => (
-      <Page key={cat.id}>
+    ...menuCategories
+      .filter((cat) => cat.items.length > 0)
+      .map((cat) => (
+        <Page key={cat.id}>
         <h4 className="book-cat__name">{cat.name}</h4>
         <p className="book-cat__note">{cat.note}</p>
         <ul className="book-cat__list">

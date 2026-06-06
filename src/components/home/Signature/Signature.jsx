@@ -4,13 +4,10 @@ import Figure from '../../ui/Figure/Figure'
 import { menuCategories } from '../../../data/menu'
 import './Signature.css'
 
-// Подбрани ястия — по едно акцентно от основните категории.
-const signature = [
-  menuCategories[1].items[0],
-  menuCategories[1].items[2],
-  menuCategories[0].items[0],
-  menuCategories[2].items[1],
-]
+// Подбрани ястия от менюто (първите налични)
+const signature = menuCategories
+  .flatMap((c) => c.items)
+  .slice(0, 4)
 
 export default function Signature() {
   return (
