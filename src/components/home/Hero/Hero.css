@@ -36,18 +36,6 @@
     linear-gradient(180deg, rgba(20, 36, 27, 0.4) 0%, rgba(20, 36, 27, 0.2) 42%, rgba(20, 36, 27, 0.72) 100%);
 }
 
-/* 3D платно */
-.hero__scene {
-  position: absolute;
-  inset: 0;
-  z-index: 1;
-  pointer-events: none;
-}
-.hero__scene canvas {
-  width: 100% !important;
-  height: 100% !important;
-}
-
 /* меки светлинни ореоли */
 .hero::before {
   content: '';

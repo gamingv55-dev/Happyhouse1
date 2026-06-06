@@ -1,0 +1,195 @@
+.rosco {
+  position: absolute;
+  right: clamp(14px, 4vw, 48px);
+  bottom: clamp(16px, 5vw, 44px);
+  z-index: 6;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 14px;
+}
+
+/* --- Бутонът с главата --- */
+.rosco-btn {
+  position: relative;
+  width: clamp(72px, 10vw, 104px);
+  filter: drop-shadow(0 10px 18px rgba(20, 36, 27, 0.4));
+  transition: transform 0.35s var(--ease);
+}
+.rosco-btn:hover {
+  transform: translateY(-4px) scale(1.05);
+}
+.rosco-btn:active {
+  transform: translateY(0) scale(0.98);
+}
+
+.rosco-head {
+  width: 100%;
+  height: auto;
+  animation: rosco-bob 3.2s ease-in-out infinite;
+  transform-origin: 50% 90%;
+}
+@keyframes rosco-bob {
+  0%, 100% {
+    transform: translateY(0) rotate(-2deg);
+  }
+  50% {
+    transform: translateY(-6px) rotate(2deg);
+  }
+}
+
+/* Очи — мигане */
+.rosco-eyes {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: rosco-blink 4.5s infinite;
+}
+@keyframes rosco-blink {
+  0%, 90%, 100% {
+    transform: scaleY(1);
+  }
+  93% {
+    transform: scaleY(0.12);
+  }
+}
+
+/* Уши — потрепване */
+.rosco-ear {
+  transform-box: fill-box;
+  transform-origin: bottom center;
+}
+.rosco-ear--l {
+  animation: rosco-ear 3.6s ease-in-out infinite;
+}
+.rosco-ear--r {
+  animation: rosco-ear 3.6s ease-in-out infinite 0.4s;
+}
+@keyframes rosco-ear {
+  0%, 80%, 100% {
+    transform: rotate(0deg);
+  }
+  88% {
+    transform: rotate(-9deg);
+  }
+}
+
+/* Подсказка „Здравей!" */
+.rosco-hint {
+  position: absolute;
+  top: -14px;
+  left: -8px;
+  padding: 4px 10px;
+  background: var(--clay);
+  color: #fbf0e7;
+  font-size: 0.72rem;
+  font-weight: 700;
+  border-radius: var(--r-pill);
+  white-space: nowrap;
+  box-shadow: var(--shadow-sm);
+  animation: rosco-hint 2.6s ease-in-out infinite;
+}
+@keyframes rosco-hint {
+  0%, 100% {
+    transform: translateY(0) rotate(-6deg);
+  }
+  50% {
+    transform: translateY(-4px) rotate(-6deg);
+  }
+}
+.rosco.is-open .rosco-hint {
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* --- Балончето --- */
+.rosco-bubble {
+  position: relative;
+  width: clamp(220px, 60vw, 260px);
+  padding: 14px;
+  background: var(--surface);
+  border-radius: var(--r-lg);
+  box-shadow: var(--shadow-lg);
+  transform-origin: bottom right;
+  transform: scale(0.4) translateY(20px);
+  opacity: 0;
+  pointer-events: none;
+  transition:
+    transform 0.4s var(--ease),
+    opacity 0.35s var(--ease);
+}
+.rosco.is-open .rosco-bubble {
+  transform: scale(1) translateY(0);
+  opacity: 1;
+  pointer-events: auto;
+}
+/* опашчица на балона */
+.rosco-bubble::after {
+  content: '';
+  position: absolute;
+  right: 30px;
+  bottom: -9px;
+  width: 18px;
+  height: 18px;
+  background: var(--surface);
+  transform: rotate(45deg);
+  border-radius: 0 0 4px 0;
+}
+
+.rosco-bubble__close {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  z-index: 2;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  border-radius: var(--r-pill);
+  background: rgba(20, 36, 27, 0.5);
+  color: var(--on-dark);
+  transition: background 0.3s var(--ease);
+}
+.rosco-bubble__close:hover {
+  background: var(--clay);
+}
+
+.rosco-bubble__photo {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  border-radius: var(--r-md);
+  overflow: hidden;
+  background: var(--sage);
+  display: grid;
+  place-items: center;
+}
+.rosco-bubble__photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.rosco-bubble__fallback {
+  font-size: 3.4rem;
+}
+.rosco-bubble__caption {
+  margin-top: 10px;
+  text-align: center;
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 1.45rem;
+  color: var(--green-800);
+}
+.rosco-bubble__caption strong {
+  color: var(--clay);
+  font-style: normal;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .rosco-head,
+  .rosco-eyes,
+  .rosco-ear,
+  .rosco-hint {
+    animation: none;
+  }
+}
