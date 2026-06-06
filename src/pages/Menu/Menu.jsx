@@ -1,5 +1,6 @@
 import PageHero from '../../components/ui/PageHero/PageHero'
 import Reveal from '../../components/ui/Reveal/Reveal'
+import MenuBook from '../../components/ui/MenuBook/MenuBook'
 import { menuCategories } from '../../data/menu'
 import './Menu.css'
 
@@ -12,7 +13,20 @@ export default function Menu() {
         lead="Домашни ястия, приготвени бавно и с пресни продукти. Менюто се обновява със сезоните."
       />
 
-      <section className="section">
+      {/* Книга-меню за прелистване */}
+      <section className="section menu-book-section">
+        <div className="container">
+          <Reveal className="menu-book-intro">
+            <span className="kicker kicker--center">Прелисти менюто</span>
+            <h2 className="title-lg">Нашата книга-меню</h2>
+          </Reveal>
+          <Reveal delay={120}>
+            <MenuBook />
+          </Reveal>
+        </div>
+      </section>
+
+      <section className="section menu-list-section">
         <div className="container menu-page">
           {menuCategories.map((cat) => (
             <div className="menu-cat" key={cat.id}>

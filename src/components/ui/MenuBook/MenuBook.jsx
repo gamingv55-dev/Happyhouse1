@@ -1,0 +1,107 @@
+import { forwardRef, useRef, useState } from 'react'
+import HTMLFlipBook from 'react-pageflip'
+import { FiChevronLeft, FiChevronRight } from 'react-icons/fi'
+import { menuCategories } from '../../../data/menu'
+import { menuPages } from '../../../data/menuPages'
+import './MenuBook.css'
+
+// Една страница от книгата (react-pageflip изисква forwardRef).
+const Page = forwardRef(function Page({ children, className = '' }, ref) {
+  return (
+    <div className={`book-page ${className}`} ref={ref}>
+      <div className="book-page__inner">{children}</div>
+    </div>
+  )
+})
+
+// Снимка-страница (когато има реални снимки на менюто)
+const ImagePage = forwardRef(function ImagePage({ src, n }, ref) {
+  return (
+    <div className="book-page book-page--image" ref={ref}>
+      <img src={src} alt={`Страница ${n} от менюто`} className="book-page__img" />
+    </div>
+  )
+})
+
+export default function MenuBook() {
+  const bookRef = useRef(null)
+  const [page, setPage] = useState(0)
+  const usePhotos = menuPages.length > 0
+
+  const flip = (dir) => {
+    const pf = bookRef.current?.pageFlip?.()
+    if (!pf) return
+    dir === 'next' ? pf.flipNext() : pf.flipPrev()
+  }
+
+  // Генерирани страници от текстовото меню
+  const generated = [
+    <Page key="cover" className="book-page--cover">
+      <span className="book-cover__kicker">Happy House</span>
+      <span className="book-cover__leaf">❦</span>
+      <h3 className="book-cover__title">Меню</h3>
+      <span className="book-cover__since">градина-бистро · от 2014</span>
+      <span className="book-cover__hint">прелисти →</span>
+    </Page>,
+    ...menuCategories.map((cat) => (
+      <Page key={cat.id}>
+        <h4 className="book-cat__name">{cat.name}</h4>
+        <p className="book-cat__note">{cat.note}</p>
+        <ul className="book-cat__list">
+          {cat.items.map((item) => (
+            <li key={item.name} className="book-item">
+              <div className="book-item__head">
+                <span className="book-item__name">{item.name}</span>
+                <span className="book-item__dots" />
+                <span className="book-item__price">{item.price}</span>
+              </div>
+              <span className="book-item__desc">{item.desc}</span>
+            </li>
+          ))}
+        </ul>
+      </Page>
+    )),
+    <Page key="back" className="book-page--back">
+      <span className="book-cover__leaf">❦</span>
+      <h3 className="book-back__title">Добър апетит!</h3>
+      <p className="book-back__text">Заповядайте отново в градината на Happy House.</p>
+    </Page>,
+  ]
+
+  const photoPages = menuPages.map((src, i) => <ImagePage key={src} src={src} n={i + 1} />)
+
+  return (
+    <div className="menu-book">
+      <div className="menu-book__stage">
+        <HTMLFlipBook
+          ref={bookRef}
+          width={400}
+          height={560}
+          minWidth={260}
+          maxWidth={560}
+          minHeight={380}
+          maxHeight={760}
+          size="stretch"
+          showCover={true}
+          maxShadowOpacity={0.35}
+          mobileScrollSupport={true}
+          drawShadow={true}
+          className="menu-book__flip"
+          onFlip={(e) => setPage(e.data)}
+        >
+          {usePhotos ? photoPages : generated}
+        </HTMLFlipBook>
+      </div>
+
+      <div className="menu-book__controls">
+        <button className="menu-book__btn" onClick={() => flip('prev')} aria-label="Предишна страница" disabled={page === 0}>
+          <FiChevronLeft />
+        </button>
+        <span className="menu-book__hint">Дръпни ъгъла на страницата, за да прелистиш</span>
+        <button className="menu-book__btn" onClick={() => flip('next')} aria-label="Следваща страница">
+          <FiChevronRight />
+        </button>
+      </div>
+    </div>
+  )
+}

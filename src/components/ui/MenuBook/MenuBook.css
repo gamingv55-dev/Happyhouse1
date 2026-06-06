@@ -1,0 +1,187 @@
+.menu-book {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 22px;
+}
+.menu-book__stage {
+  width: 100%;
+  max-width: 880px;
+  /* перспектива + лек фон, за да изпъкне книгата */
+  display: flex;
+  justify-content: center;
+}
+.menu-book__flip {
+  margin-inline: auto;
+}
+
+/* --- Страница --- */
+.book-page {
+  background: var(--surface);
+  color: var(--ink);
+  box-shadow: inset 0 0 40px rgba(122, 91, 48, 0.06);
+}
+.book-page__inner {
+  height: 100%;
+  padding: clamp(20px, 4%, 36px);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+/* тънка „подвързия" към гръбчето */
+.book-page:nth-child(even) {
+  border-left: 1px solid var(--line);
+}
+.book-page:nth-child(odd) {
+  border-right: 1px solid var(--line);
+}
+
+.book-page--image {
+  background: var(--green-900);
+}
+.book-page__img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* --- Корица --- */
+.book-page--cover,
+.book-page--back {
+  background: linear-gradient(155deg, #2c4a37 0%, #1c3225 100%);
+  color: var(--on-dark);
+}
+.book-page--cover .book-page__inner,
+.book-page--back .book-page__inner {
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  gap: 10px;
+  border: 1px solid rgba(205, 163, 90, 0.35);
+  margin: 14px;
+  height: auto;
+  flex: 1;
+  border-radius: 6px;
+}
+.book-cover__kicker {
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--brass);
+}
+.book-cover__leaf {
+  font-size: 2rem;
+  color: var(--gold);
+}
+.book-cover__title,
+.book-back__title {
+  font-family: var(--font-display);
+  font-size: clamp(2.4rem, 6vw, 3.4rem);
+  color: var(--on-dark);
+}
+.book-cover__since {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 1.05rem;
+  color: var(--on-dark-soft);
+}
+.book-cover__hint {
+  margin-top: 18px;
+  font-size: 0.78rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--brass);
+  animation: book-hint 2s ease-in-out infinite;
+}
+@keyframes book-hint {
+  0%, 100% { transform: translateX(0); opacity: 0.7; }
+  50% { transform: translateX(5px); opacity: 1; }
+}
+.book-back__text {
+  max-width: 22ch;
+  color: var(--on-dark-soft);
+}
+
+/* --- Категория --- */
+.book-cat__name {
+  font-family: var(--font-display);
+  font-size: clamp(1.5rem, 4vw, 2rem);
+  color: var(--green-800);
+}
+.book-cat__note {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 0.98rem;
+  color: var(--clay);
+  margin-bottom: 14px;
+  padding-bottom: 12px;
+  border-bottom: 2px solid var(--green-700);
+}
+.book-cat__list {
+  display: flex;
+  flex-direction: column;
+  gap: 13px;
+  overflow: hidden;
+}
+.book-item__head {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+}
+.book-item__name {
+  font-family: var(--font-display);
+  font-size: 1.12rem;
+  font-weight: 600;
+  color: var(--ink);
+}
+.book-item__dots {
+  flex: 1;
+  border-bottom: 1.5px dotted var(--line-strong);
+  transform: translateY(-3px);
+}
+.book-item__price {
+  font-family: var(--font-display);
+  font-weight: 700;
+  color: var(--clay);
+  white-space: nowrap;
+}
+.book-item__desc {
+  display: block;
+  font-size: 0.82rem;
+  color: var(--ink-soft);
+  margin-top: 1px;
+}
+
+/* --- Контроли --- */
+.menu-book__controls {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+.menu-book__btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  border-radius: var(--r-pill);
+  background: var(--green-700);
+  color: var(--on-dark);
+  font-size: 1.3rem;
+  transition: background 0.3s var(--ease), transform 0.3s var(--ease), opacity 0.3s var(--ease);
+}
+.menu-book__btn:hover {
+  background: var(--clay);
+  transform: translateY(-2px);
+}
+.menu-book__btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+.menu-book__hint {
+  font-size: 0.82rem;
+  color: var(--ink-faint);
+  text-align: center;
+  max-width: 18ch;
+}
