@@ -30,7 +30,7 @@ export default function RoscoMascot() {
           )}
         </div>
         <p className="rosco-bubble__caption">
-          Аз съм <strong>Роско</strong> 🦙
+          Аз съм <strong>Роско</strong> и те очаквам! 🦙
         </p>
       </div>
 
