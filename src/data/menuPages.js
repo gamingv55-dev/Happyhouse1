@@ -1,10 +1,17 @@
 // Снимки на реалното меню за книгата-флипбук.
-// Когато заведението изпрати снимките, ги слагаме в public/menu/
-// (напр. 1.webp, 2.webp, …) и ги изброяваме тук по ред.
-// Докато масивът е празен, книгата показва автоматично генерирани
-// страници от текстовото меню (src/data/menu.js).
-//
-// Пример, когато има снимки:
-// export const menuPages = ['/menu/1.webp', '/menu/2.webp', '/menu/3.webp']
-
-export const menuPages = []
+// Файловете са в public/menu/ (1.jpg … 12.jpg), изброени по ред.
+// Ако масивът е празен, книгата генерира страници от текстовото меню.
+export const menuPages = [
+  '/menu/1.jpg',
+  '/menu/2.jpg',
+  '/menu/3.jpg',
+  '/menu/4.jpg',
+  '/menu/5.jpg',
+  '/menu/6.jpg',
+  '/menu/7.jpg',
+  '/menu/8.jpg',
+  '/menu/9.jpg',
+  '/menu/10.jpg',
+  '/menu/11.jpg',
+  '/menu/12.jpg',
+]

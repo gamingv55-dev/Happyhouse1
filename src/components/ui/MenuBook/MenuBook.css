@@ -37,12 +37,12 @@
 }
 
 .book-page--image {
-  background: var(--green-900);
+  background: #f3ecd9;
 }
 .book-page__img {
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  object-fit: contain;
 }
 
 /* --- Корица --- */

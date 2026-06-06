@@ -25,6 +25,8 @@ const ImagePage = forwardRef(function ImagePage({ src, n }, ref) {
 
 export default function MenuBook() {
   const bookRef = useRef(null)
+  const containerRef = useRef(null)
+  const openedRef = useRef(false)
   const [page, setPage] = useState(0)
   const [isMobile, setIsMobile] = useState(false)
   const usePhotos = menuPages.length > 0
@@ -48,6 +50,38 @@ export default function MenuBook() {
     const t = setTimeout(() => window.dispatchEvent(new Event('resize')), 60)
     return () => clearTimeout(t)
   }, [isMobile])
+
+  // Книгата сама се разгръща, когато се появи на екрана (веднъж)
+  useEffect(() => {
+    const el = containerRef.current
+    if (!el) return
+    const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+
+    const openBook = () => {
+      let tries = 0
+      const attempt = () => {
+        const pf = bookRef.current?.pageFlip?.()
+        if (pf && typeof pf.flipNext === 'function') {
+          pf.flipNext()
+        } else if (tries++ < 20) {
+          setTimeout(attempt, 200)
+        }
+      }
+      attempt()
+    }
+
+    const obs = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting && !openedRef.current) {
+          openedRef.current = true
+          if (!reduced) setTimeout(openBook, 600)
+        }
+      },
+      { threshold: 0.3 },
+    )
+    obs.observe(el)
+    return () => obs.disconnect()
+  }, [])
 
   const flip = (dir) => {
     const pf = bookRef.current?.pageFlip?.()
@@ -92,7 +126,7 @@ export default function MenuBook() {
   const photoPages = menuPages.map((src, i) => <ImagePage key={src} src={src} n={i + 1} />)
 
   return (
-    <div className="menu-book">
+    <div className="menu-book" ref={containerRef}>
       <div className="menu-book__stage">
         <HTMLFlipBook
           key={isMobile ? 'mobile' : 'desktop'}
