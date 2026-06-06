@@ -1,25 +1,49 @@
-.cursor-ring,
-.cursor-dot {
+.cursor-leaf,
+.cursor-halo {
   position: fixed;
   top: 0;
   left: 0;
   z-index: 300;
   pointer-events: none;
-  border-radius: 50%;
   will-change: transform;
-  margin-left: 0;
 }
-.cursor-dot {
-  width: 7px;
-  height: 7px;
-  margin: -3.5px 0 0 -3.5px;
-  background: var(--clay);
+
+/* Листото — следва мишката отблизо */
+.cursor-leaf {
+  margin: -13px 0 0 -13px;
+  filter: drop-shadow(0 2px 4px rgba(20, 36, 27, 0.35));
+  transition: scale 0.25s var(--ease);
 }
-.cursor-ring {
-  width: 38px;
-  height: 38px;
-  margin: -19px 0 0 -19px;
-  border: 1.5px solid var(--brass);
+.cursor-leaf__svg {
+  width: 26px;
+  height: 26px;
+  transform-origin: 50% 50%;
+  animation: leaf-sway 3.2s ease-in-out infinite;
+}
+@keyframes leaf-sway {
+  0%,
+  100% {
+    transform: rotate(-6deg);
+  }
+  50% {
+    transform: rotate(6deg);
+  }
+}
+.cursor-leaf.is-hover {
+  scale: 1.25;
+}
+.cursor-leaf.is-press {
+  scale: 0.85;
+}
+
+/* Мек ореол — изостава леко и расте при посочване */
+.cursor-halo {
+  width: 40px;
+  height: 40px;
+  margin: -20px 0 0 -20px;
+  border-radius: 50%;
+  border: 1.5px solid rgba(126, 143, 120, 0.55);
+  background: rgba(126, 143, 120, 0.08);
   transition:
     width 0.3s var(--ease),
     height 0.3s var(--ease),
@@ -27,12 +51,12 @@
     background 0.3s var(--ease),
     border-color 0.3s var(--ease);
 }
-.cursor-ring.is-hover {
-  width: 60px;
-  height: 60px;
-  margin: -30px 0 0 -30px;
+.cursor-halo.is-hover {
+  width: 64px;
+  height: 64px;
+  margin: -32px 0 0 -32px;
   background: rgba(189, 106, 66, 0.12);
-  border-color: var(--clay);
+  border-color: rgba(189, 106, 66, 0.6);
 }
 
 /* Скриваме системния курсор само когато нашият е активен (десктоп) */
@@ -43,8 +67,14 @@ body.has-custom-cursor button {
 }
 
 @media (pointer: coarse) {
-  .cursor-ring,
-  .cursor-dot {
+  .cursor-leaf,
+  .cursor-halo {
     display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cursor-leaf__svg {
+    animation: none;
   }
 }
