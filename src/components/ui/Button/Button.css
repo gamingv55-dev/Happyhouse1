@@ -1,0 +1,96 @@
+.btn {
+  --btn-bg: var(--green-700);
+  --btn-fg: var(--on-dark);
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 15px 30px;
+  border-radius: var(--r-pill);
+  font-family: var(--font-body);
+  font-size: 0.92rem;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+  color: var(--btn-fg);
+  background: var(--btn-bg);
+  overflow: hidden;
+  isolation: isolate;
+  transition:
+    transform 0.4s var(--ease),
+    box-shadow 0.4s var(--ease),
+    color 0.4s var(--ease),
+    border-color 0.4s var(--ease);
+}
+.btn__label,
+.btn__icon {
+  position: relative;
+  z-index: 1;
+}
+
+/* Плъзгащ се фон при hover (фина micro-interaction) */
+.btn::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background: var(--clay);
+  transform: translateY(102%);
+  transition: transform 0.5s var(--ease);
+}
+.btn:hover::before {
+  transform: translateY(0);
+}
+.btn:hover {
+  box-shadow: var(--shadow-md);
+}
+
+/* Стрелка, която се избутва леко напред */
+.btn__icon {
+  display: inline-flex;
+  transition: transform 0.4s var(--ease);
+}
+.btn--arrow:hover .btn__icon {
+  transform: translateX(4px);
+}
+
+/* --- Варианти --- */
+.btn--outline {
+  --btn-bg: transparent;
+  --btn-fg: var(--green-800);
+  border: 1.5px solid var(--green-700);
+}
+.btn--outline:hover {
+  --btn-fg: var(--on-dark);
+}
+
+.btn--ghost {
+  --btn-bg: transparent;
+  --btn-fg: var(--green-800);
+  padding-inline: 4px;
+  border-radius: 0;
+}
+.btn--ghost::before {
+  display: none;
+}
+.btn--ghost:hover {
+  box-shadow: none;
+  color: var(--clay-dark);
+}
+/* Подчертаваща линия за ghost */
+.btn--ghost .btn__label {
+  background-image: linear-gradient(var(--clay), var(--clay));
+  background-position: 0 100%;
+  background-repeat: no-repeat;
+  background-size: 0% 1.5px;
+  padding-bottom: 3px;
+  transition: background-size 0.4s var(--ease);
+}
+.btn--ghost:hover .btn__label {
+  background-size: 100% 1.5px;
+}
+
+/* На тъмен фон */
+.btn--on-dark.btn--outline {
+  --btn-fg: var(--on-dark);
+  border-color: rgba(241, 235, 220, 0.5);
+}

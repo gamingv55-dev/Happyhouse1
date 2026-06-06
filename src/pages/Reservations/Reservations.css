@@ -1,0 +1,207 @@
+.reserve {
+  display: grid;
+  grid-template-columns: 1.5fr 0.9fr;
+  gap: clamp(28px, 4vw, 56px);
+  align-items: start;
+}
+
+/* --- Форма --- */
+.reserve__form-wrap {
+  padding: clamp(28px, 3vw, 44px);
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--r-lg);
+  box-shadow: var(--shadow-sm);
+}
+.reserve-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.reserve-form__row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+.reserve-form__row--3 {
+  grid-template-columns: 1fr 1fr 1fr;
+}
+
+/* Поле + анимация на фокус */
+.field {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.field__label {
+  font-size: 0.84rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  color: var(--ink-soft);
+}
+.field__input {
+  width: 100%;
+  padding: 13px 16px;
+  background: var(--bg);
+  border: 1.5px solid var(--line-strong);
+  border-radius: var(--r-sm);
+  color: var(--ink);
+  transition:
+    border-color 0.35s var(--ease),
+    box-shadow 0.35s var(--ease),
+    background 0.35s var(--ease);
+}
+.field__input::placeholder {
+  color: var(--ink-faint);
+}
+.field__input:focus {
+  outline: none;
+  border-color: var(--green-600);
+  background: var(--surface);
+  box-shadow: 0 0 0 4px rgba(48, 86, 64, 0.12);
+}
+.field--error .field__input {
+  border-color: var(--clay-dark);
+}
+.field__error {
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--clay-dark);
+}
+
+.reserve-form__submit {
+  margin-top: 6px;
+  padding: 16px 28px;
+  border-radius: var(--r-pill);
+  background: var(--green-700);
+  color: var(--on-dark);
+  font-weight: 700;
+  font-size: 1rem;
+  transition:
+    background 0.4s var(--ease),
+    transform 0.4s var(--ease),
+    box-shadow 0.4s var(--ease);
+}
+.reserve-form__submit:hover {
+  background: var(--clay);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+/* --- Успех --- */
+.reserve__success {
+  text-align: center;
+  padding: clamp(20px, 4vw, 48px) 8px;
+}
+.reserve__success-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 64px;
+  height: 64px;
+  border-radius: var(--r-pill);
+  background: var(--green-600);
+  color: var(--on-dark);
+  font-size: 1.7rem;
+}
+.reserve__success-title {
+  margin-top: 18px;
+  font-size: 2rem;
+  color: var(--green-800);
+}
+.reserve__success-text {
+  margin-top: 10px;
+  color: var(--ink-soft);
+}
+.reserve__success-text a {
+  color: var(--clay-dark);
+  font-weight: 700;
+}
+.reserve__again {
+  margin-top: 24px;
+  padding: 12px 26px;
+  border-radius: var(--r-pill);
+  border: 1.5px solid var(--green-700);
+  color: var(--green-800);
+  font-weight: 700;
+  transition: background 0.35s var(--ease), color 0.35s var(--ease);
+}
+.reserve__again:hover {
+  background: var(--green-700);
+  color: var(--on-dark);
+}
+
+/* --- Aside --- */
+.reserve__aside {
+  padding: clamp(28px, 3vw, 40px);
+  background: var(--green-800);
+  color: var(--on-dark);
+  border-radius: var(--r-lg);
+}
+.reserve__aside-title {
+  font-size: 1.6rem;
+  color: var(--on-dark);
+}
+.reserve__contacts {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  margin: 22px 0;
+  padding-bottom: 22px;
+  border-bottom: 1px solid rgba(241, 235, 220, 0.16);
+}
+.reserve__contacts li {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.reserve__contacts svg {
+  color: var(--brass);
+  flex-shrink: 0;
+}
+.reserve__contacts a {
+  transition: color 0.3s var(--ease);
+}
+.reserve__contacts a:hover {
+  color: var(--brass);
+}
+.reserve__hours h3 {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-body);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--on-dark);
+  margin-bottom: 14px;
+}
+.reserve__hours h3 svg {
+  color: var(--brass);
+}
+.reserve__hours-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 7px 0;
+  font-size: 0.94rem;
+  color: var(--on-dark-soft);
+}
+.reserve__hours-time {
+  color: var(--on-dark);
+  font-weight: 600;
+}
+
+@media (max-width: 880px) {
+  .reserve {
+    grid-template-columns: 1fr;
+  }
+}
+@media (max-width: 540px) {
+  .reserve-form__row,
+  .reserve-form__row--3 {
+    grid-template-columns: 1fr;
+  }
+}

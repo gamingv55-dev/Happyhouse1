@@ -1,0 +1,47 @@
+.reserve-cta__panel {
+  position: relative;
+  overflow: hidden;
+  text-align: center;
+  padding: clamp(48px, 8vw, 96px) clamp(24px, 6vw, 80px);
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--r-lg);
+  box-shadow: var(--shadow-md);
+}
+.reserve-cta__leaf {
+  position: absolute;
+  color: var(--green-500);
+  opacity: 0.16;
+  pointer-events: none;
+}
+.reserve-cta__leaf--1 {
+  width: 150px;
+  top: -20px;
+  left: -20px;
+  transform: rotate(20deg);
+}
+.reserve-cta__leaf--2 {
+  width: 200px;
+  right: -30px;
+  bottom: -40px;
+}
+.reserve-cta__kicker {
+  position: relative;
+}
+.reserve-cta__title {
+  position: relative;
+  margin-top: 16px;
+}
+.reserve-cta__text {
+  position: relative;
+  margin: 20px auto 36px;
+  max-width: 46ch;
+}
+.reserve-cta__actions {
+  position: relative;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 18px;
+}

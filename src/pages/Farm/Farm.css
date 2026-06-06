@@ -1,0 +1,76 @@
+.farm-animals {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: clamp(18px, 2.5vw, 28px);
+  margin-top: clamp(40px, 6vw, 64px);
+}
+.animal-card {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--r-lg);
+  overflow: hidden;
+  transition:
+    transform 0.5s var(--ease),
+    box-shadow 0.5s var(--ease);
+}
+.animal-card:hover {
+  transform: translateY(-8px);
+  box-shadow: var(--shadow-lg);
+}
+.animal-card .figure {
+  border-radius: 0;
+}
+.animal-card__body {
+  padding: clamp(20px, 2.4vw, 30px);
+}
+.animal-card__species {
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--clay-dark);
+}
+.animal-card__name {
+  margin-top: 8px;
+  font-size: 1.9rem;
+  color: var(--green-800);
+}
+.animal-card__desc {
+  margin-top: 12px;
+  color: var(--ink-soft);
+}
+
+.farm-invite {
+  background: var(--green-800);
+  color: var(--on-dark);
+  padding-block: clamp(60px, 8vw, 110px);
+  text-align: center;
+}
+.farm-invite__inner {
+  display: flex;
+  justify-content: center;
+}
+.farm-invite__kicker {
+  justify-content: center;
+  color: var(--brass);
+}
+.farm-invite__kicker::before {
+  background: var(--brass);
+}
+.farm-invite__title {
+  margin-top: 16px;
+  color: var(--on-dark);
+}
+.farm-invite__text {
+  margin: 20px auto 34px;
+  max-width: 50ch;
+  color: var(--on-dark-soft);
+}
+
+@media (max-width: 860px) {
+  .farm-animals {
+    grid-template-columns: 1fr;
+    max-width: 440px;
+    margin-inline: auto;
+  }
+}

@@ -1,0 +1,31 @@
+.section-intro {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+.section-intro--center {
+  align-items: center;
+  text-align: center;
+}
+.section-intro__title {
+  max-width: 18ch;
+}
+.section-intro--center .section-intro__title {
+  max-width: 22ch;
+}
+.section-intro__lead {
+  max-width: 52ch;
+}
+.section-intro--light .section-intro__title {
+  color: var(--on-dark);
+}
+.section-intro--light .section-intro__lead {
+  color: var(--on-dark-soft);
+}
+.section-intro--light .kicker {
+  color: var(--brass);
+}
+.section-intro--light .kicker::before,
+.section-intro--light .kicker::after {
+  background: var(--brass);
+}
