@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import Button from '../../ui/Button/Button'
 import Leaf from '../../ui/Leaf/Leaf'
 import RoscoMascot from '../../ui/RoscoMascot/RoscoMascot'
@@ -8,9 +8,10 @@ import './Hero.css'
 
 export default function Hero() {
   const reduced = usePrefersReducedMotion()
-  const photoRef = useRef(null)
+  const mediaRef = useRef(null)
+  const [videoReady, setVideoReady] = useState(false)
 
-  // Фин parallax на снимката при скрол
+  // Фин parallax на фона при скрол
   useEffect(() => {
     if (reduced) return
     let raf = 0
@@ -18,8 +19,8 @@ export default function Hero() {
       cancelAnimationFrame(raf)
       raf = requestAnimationFrame(() => {
         const y = window.scrollY
-        if (photoRef.current) {
-          photoRef.current.style.transform = `scale(1.08) translateY(${y * 0.18}px)`
+        if (mediaRef.current) {
+          mediaRef.current.style.transform = `translateY(${y * 0.15}px)`
         }
       })
     }
@@ -32,8 +33,28 @@ export default function Hero() {
 
   return (
     <section className="hero">
-      {/* Реална снимка на градината (фон) */}
-      <div className="hero__photo" ref={photoRef} role="img" aria-label="Входът на градината Happy House с цветя и синята арка" />
+      {/* Фон: снимка (резервна) + видео отгоре, когато е налично */}
+      <div className="hero__media" ref={mediaRef}>
+        <div
+          className="hero__photo"
+          role="img"
+          aria-label="Входът на градината Happy House с цветя и синята арка"
+        />
+        {!reduced && (
+          <video
+            className={`hero__video ${videoReady ? 'is-playing' : ''}`}
+            autoPlay
+            muted
+            loop
+            playsInline
+            preload="auto"
+            onCanPlay={() => setVideoReady(true)}
+          >
+            <source src="/hero-video.mp4" type="video/mp4" />
+          </video>
+        )}
+        <div className="hero__veil" aria-hidden="true" />
+      </div>
 
       {/* статични декорации */}
       <div className="hero__bg" aria-hidden="true">
