@@ -12,30 +12,6 @@ if (typeof window !== 'undefined') {
   })
 }
 
-// --- Стилизирано ниско-полигонално дърво ---
-function LowPolyTree() {
-  return (
-    <group position={[0, -1.1, 0]}>
-      <mesh position={[0, 0.5, 0]} castShadow>
-        <cylinderGeometry args={[0.16, 0.22, 1.4, 6]} />
-        <meshStandardMaterial color="#7a4a28" flatShading roughness={0.9} />
-      </mesh>
-      <mesh position={[0, 1.7, 0]}>
-        <icosahedronGeometry args={[0.95, 0]} />
-        <meshStandardMaterial color="#3f7d65" flatShading roughness={0.7} />
-      </mesh>
-      <mesh position={[0.55, 1.2, 0.2]}>
-        <icosahedronGeometry args={[0.6, 0]} />
-        <meshStandardMaterial color="#5f9a82" flatShading roughness={0.7} />
-      </mesh>
-      <mesh position={[-0.5, 1.25, -0.1]}>
-        <icosahedronGeometry args={[0.55, 0]} />
-        <meshStandardMaterial color="#356b54" flatShading roughness={0.7} />
-      </mesh>
-    </group>
-  )
-}
-
 // --- Плаващи листа (тетраедри) ---
 function FloatingLeaves({ count = 14 }) {
   const items = useMemo(() => {
@@ -75,11 +51,8 @@ function SceneContent() {
 
   return (
     <group ref={group}>
-      <Float speed={1.4} rotationIntensity={0.4} floatIntensity={0.8}>
-        <LowPolyTree />
-      </Float>
-      <FloatingLeaves />
-      <Sparkles count={50} scale={[9, 6, 5]} size={3} speed={0.4} color="#cda35a" opacity={0.7} />
+      <FloatingLeaves count={12} />
+      <Sparkles count={60} scale={[10, 6, 5]} size={3.2} speed={0.4} color="#e9d6a6" opacity={0.8} />
     </group>
   )
 }

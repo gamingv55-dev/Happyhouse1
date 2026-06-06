@@ -1,4 +1,4 @@
-import { Suspense, lazy, useEffect, useState } from 'react'
+import { Suspense, lazy, useEffect, useRef, useState } from 'react'
 import Button from '../../ui/Button/Button'
 import Leaf from '../../ui/Leaf/Leaf'
 import { usePrefersReducedMotion } from '../../../hooks/usePrefersReducedMotion'
@@ -11,15 +11,39 @@ const GardenScene = lazy(() => import('../../three/GardenScene/GardenScene'))
 export default function Hero() {
   const reduced = usePrefersReducedMotion()
   const [show3D, setShow3D] = useState(false)
+  const photoRef = useRef(null)
 
   useEffect(() => {
     // 3D само на по-големи екрани и при позволено движение
     if (!reduced && window.innerWidth >= 768) setShow3D(true)
   }, [reduced])
 
+  // Фин parallax на снимката при скрол
+  useEffect(() => {
+    if (reduced) return
+    let raf = 0
+    const onScroll = () => {
+      cancelAnimationFrame(raf)
+      raf = requestAnimationFrame(() => {
+        const y = window.scrollY
+        if (photoRef.current) {
+          photoRef.current.style.transform = `scale(1.08) translateY(${y * 0.18}px)`
+        }
+      })
+    }
+    window.addEventListener('scroll', onScroll, { passive: true })
+    return () => {
+      window.removeEventListener('scroll', onScroll)
+      cancelAnimationFrame(raf)
+    }
+  }, [reduced])
+
   return (
     <section className="hero">
-      {/* 3D фон */}
+      {/* Реална снимка на градината (фон) */}
+      <div className="hero__photo" ref={photoRef} role="img" aria-label="Входът на градината Happy House с цветя и синята арка" />
+
+      {/* 3D частици и листа върху снимката */}
       <div className="hero__scene">
         {show3D && (
           <Suspense fallback={null}>
@@ -28,7 +52,7 @@ export default function Hero() {
         )}
       </div>
 
-      {/* статични декорации (винаги, дори без 3D) */}
+      {/* статични декорации */}
       <div className="hero__bg" aria-hidden="true">
         <Leaf className="hero__leaf hero__leaf--1 hero-float" variant="branch" />
         <Leaf className="hero__leaf hero__leaf--2 hero-float hero-float--slow" variant="sprig" />
