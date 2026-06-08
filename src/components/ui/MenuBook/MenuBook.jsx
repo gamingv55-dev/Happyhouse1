@@ -100,24 +100,34 @@ export default function MenuBook() {
     </Page>,
     ...menuCategories
       .filter((cat) => cat.items.length > 0)
-      .map((cat) => (
-        <Page key={cat.id}>
-        <h4 className="book-cat__name">{cat.name}</h4>
-        <p className="book-cat__note">{cat.note}</p>
-        <ul className="book-cat__list">
-          {cat.items.map((item) => (
-            <li key={item.name} className="book-item">
-              <div className="book-item__head">
-                <span className="book-item__name">{item.name}</span>
-                <span className="book-item__dots" />
-                <span className="book-item__price">{item.price}</span>
-              </div>
-              <span className="book-item__desc">{item.desc}</span>
-            </li>
-          ))}
-        </ul>
-      </Page>
-    )),
+      .flatMap((cat) => {
+        const perPage = 6
+        const chunks = []
+        for (let i = 0; i < cat.items.length; i += perPage) {
+          chunks.push(cat.items.slice(i, i + perPage))
+        }
+        return chunks.map((items, idx) => (
+          <Page key={`${cat.id}-${idx}`}>
+            <h4 className="book-cat__name">
+              {cat.name}
+              {idx > 0 ? ' (продължение)' : ''}
+            </h4>
+            {idx === 0 && <p className="book-cat__note">{cat.note}</p>}
+            <ul className="book-cat__list">
+              {items.map((item) => (
+                <li key={item.name} className="book-item">
+                  <div className="book-item__head">
+                    <span className="book-item__name">{item.name}</span>
+                    <span className="book-item__dots" />
+                    <span className="book-item__price">{item.price}</span>
+                  </div>
+                  <span className="book-item__desc">{item.desc}</span>
+                </li>
+              ))}
+            </ul>
+          </Page>
+        ))
+      }),
     <Page key="back" className="book-page--back">
       <span className="book-cover__leaf">❦</span>
       <h3 className="book-back__title">Добър апетит!</h3>
