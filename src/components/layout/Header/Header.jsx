@@ -34,8 +34,9 @@ export default function Header() {
   const solid = scrolled || !onHome || open
 
   return (
-    <header className={`header ${solid ? 'header--solid' : ''} ${open ? 'header--open' : ''}`}>
-      <div className="header__inner container">
+    <>
+      <header className={`header ${solid ? 'header--solid' : ''} ${open ? 'header--open' : ''}`}>
+        <div className="header__inner container">
         <Link to="/" className="header__brand" aria-label="Happy House — начало">
           <Leaf className="header__leaf" variant="sprig" />
           <span className="header__name">Happy House</span>
@@ -69,7 +70,8 @@ export default function Header() {
           <span></span>
           <span></span>
         </button>
-      </div>
+        </div>
+      </header>
 
       <div className={`mobile-menu ${open ? 'is-open' : ''}`} aria-hidden={!open}>
         <ul className="mobile-menu__links">
@@ -92,6 +94,6 @@ export default function Header() {
           </li>
         </ul>
       </div>
-    </header>
+    </>
   )
 }
