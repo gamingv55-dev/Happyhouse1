@@ -5,7 +5,7 @@ import './RoscoMascot.css'
 // Анимирана главичка на ламата Роско. При клик изскача балонче
 // с истинската снимка (/rosco.webp) и надпис „Аз съм Роско".
 // Опитваме няколко формата за снимката на Роско; ако никой не се зареди → емоджи
-const roscoSources = ['/rosco.webp', '/rosco.jpg', '/rosco.jpeg', '/rosco.png']
+const roscoSources = ['/llama.webp', '/rosco.webp', '/rosco.jpg', '/rosco.jpeg', '/rosco.png']
 
 export default function RoscoMascot() {
   const [open, setOpen] = useState(false)
