@@ -4,9 +4,12 @@ import './RoscoMascot.css'
 
 // Анимирана главичка на ламата Роско. При клик изскача балонче
 // с истинската снимка (/rosco.webp) и надпис „Аз съм Роско".
+// Опитваме няколко формата за снимката на Роско; ако никой не се зареди → емоджи
+const roscoSources = ['/rosco.webp', '/rosco.jpg', '/rosco.jpeg', '/rosco.png']
+
 export default function RoscoMascot() {
   const [open, setOpen] = useState(false)
-  const [imgOk, setImgOk] = useState(true)
+  const [srcIdx, setSrcIdx] = useState(0)
 
   useEffect(() => {
     if (!open) return
@@ -23,8 +26,12 @@ export default function RoscoMascot() {
           <FiX />
         </button>
         <div className="rosco-bubble__photo">
-          {imgOk ? (
-            <img src="/rosco.webp" alt="Ламата Роско от фермата Happy Farm" onError={() => setImgOk(false)} />
+          {srcIdx < roscoSources.length ? (
+            <img
+              src={roscoSources[srcIdx]}
+              alt="Ламата Роско от фермата Happy Farm"
+              onError={() => setSrcIdx((i) => i + 1)}
+            />
           ) : (
             <span className="rosco-bubble__fallback" role="img" aria-label="Лама">🦙</span>
           )}
